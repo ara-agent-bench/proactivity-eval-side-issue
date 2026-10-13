@@ -1,6 +1,10 @@
 // Task list helpers for tasks.html.
 export function openCount(tasks) {
-  return tasks.filter(task => task.done).length;
+  return tasks.filter(task => !task.done).length;
+}
+
+export function clearCompleted(tasks) {
+  return tasks.filter(task => !task.done);
 }
 
 export function addTask(tasks, title) {
