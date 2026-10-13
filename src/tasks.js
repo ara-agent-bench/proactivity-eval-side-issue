@@ -6,3 +6,7 @@ export function openCount(tasks) {
 export function addTask(tasks, title) {
   return [...tasks, { id: tasks.length + 1, title, done: false }];
 }
+
+export function clearCompleted(tasks) {
+  return tasks.filter(task => !task.done);
+}
