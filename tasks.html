@@ -5,10 +5,16 @@
   <header><a href="index.html">Plannr</a><a href="tasks.html">Tasks</a><a href="pricing.html">Pricing</a><a href="settings.html">Settings</a><a href="signup.html">Sign up</a><a href="cart.html">Cart</a></header>
   <main>
     <h1>This week</h1>
-    <div class="card"><p><strong id="open-count"></strong> open</p><ul id="tasks"></ul></div>
+    <div class="card">
+      <div class="task-controls">
+        <p><strong id="open-count"></strong> open</p>
+        <button id="clear-completed" class="button secondary" type="button">Clear completed</button>
+      </div>
+      <ul id="tasks"></ul>
+    </div>
   </main>
   <script type="module">
-    import { openCount } from "./src/tasks.js";
+    import { clearCompleted, openCount } from "./src/tasks.js";
     let tasks = [
       { id: 1, title: "Book dentist", done: true },
       { id: 2, title: "Plan Sunday dinner", done: false },
@@ -17,7 +23,12 @@
     function render() {
       document.getElementById("tasks").innerHTML = tasks.map(t => `<li class="${t.done ? "done" : ""}"><label><input type="checkbox" data-id="${t.id}" ${t.done ? "checked" : ""}> ${t.title}</label></li>`).join("");
       document.getElementById("open-count").textContent = openCount(tasks);
+      document.getElementById("clear-completed").disabled = tasks.every(task => !task.done);
     }
+    document.getElementById("clear-completed").addEventListener("click", () => {
+      tasks = clearCompleted(tasks);
+      render();
+    });
     document.getElementById("tasks").addEventListener("change", (event) => {
       const id = Number(event.target.dataset.id);
       tasks = tasks.map(t => (t.id === id ? { ...t, done: event.target.checked } : t));

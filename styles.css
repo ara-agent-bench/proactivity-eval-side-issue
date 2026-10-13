@@ -19,5 +19,8 @@ main { max-width: 640px; margin: 32px auto; padding: 0 24px; }
 .button { padding: 10px 18px; border-radius: 8px; border: 0; font-size: 15px; font-weight: 600; cursor: pointer; background: var(--brand); color: #fff; }
 .button:hover { background: var(--brand-dark); }
 .button.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+.task-controls { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.task-controls p { margin: 0; }
 .price { font-size: 28px; font-weight: 700; }
 .done { text-decoration: line-through; color: var(--muted); }
